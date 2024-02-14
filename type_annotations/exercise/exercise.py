@@ -7,14 +7,14 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 
-def calculate_average(numbers):
+def calculate_average(numbers: list[int]) -> float:
     length_of_numbers = len(numbers)
     if length_of_numbers > 0:
         return sum(numbers) / length_of_numbers
     return 0.0
 
 
-def calculate_total_sales(sales):
+def calculate_total_sales(sales: dict[str, int]):
     return sum(sales.values())
 
 

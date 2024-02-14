@@ -5,7 +5,7 @@
 # function so that the statements in the main function work correctly.
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
+from functools import partial
 
 def power(base: float, exponent: float) -> float:
     return base**exponent
@@ -15,6 +15,9 @@ def power(base: float, exponent: float) -> float:
 
 
 def main() -> None:
+    square = partial(power, exponent=2)
+    cube = partial(power, exponent = 3)
+    
     print("Square of 5:", square(5))
     print("Cube of 3:", cube(3))
 

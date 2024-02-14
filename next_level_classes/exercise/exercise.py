@@ -10,15 +10,35 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 from dataclasses import dataclass
-
+from math import pi
 
 @dataclass
 class Circle:
     _radius: float
 
+    @property
+    def radius(self) -> float:
+        return self._radius
     # TODO: Add the properties
 
+    @radius.setter
+    def radius(self, radius: float) -> None:
+        if radius < 0:
+            raise ValueError('Circle radius can not be a negative value')
+        self._radius = radius
 
+    @property
+    def diameter(self) -> float:
+        return self._radius * 2
+    
+    @property
+    def area(self) -> float:
+        return pi* self._radius ** 2
+    
+    @property
+    def circumference(self) -> float:
+        return pi * self.diameter
+    
 def create_circle(radius: float) -> Circle:
     return Circle(radius)
 

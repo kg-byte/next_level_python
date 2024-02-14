@@ -1,11 +1,33 @@
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from smtplib import SMTP
+
+# from smtplib import SMTP
+from typing import Protocol
 
 DEFAULT_EMAIL = "support@arjancodes.com"
 LOGIN = "admin"
 PASSWORD = "admin"
 
+
+class EmailServer(Protocol):
+    @property
+    def _host(self) -> str:
+        ...
+
+    def connect(self, host: str, port: int) -> None:
+        ...
+
+    def starttls(self) -> None:
+        ...
+
+    def login(self, login: str, password: str) -> None:
+        ...
+
+    def quit(self) -> None:
+        ...
+
+    def sendmail(self, from_address: str, to_address: str, message: str) -> None:
+        ...
 
 class EmailClient:
     def __init__(
@@ -15,7 +37,7 @@ class EmailClient:
         name: str | None = None,
         to_address: str = DEFAULT_EMAIL,
     ):
-        self._server = SMTP()
+        self._server: EmailServer
         host, port = str(self._server._host).split(":")  # type: ignore
         self._host: str = host
         self._port = int(port)

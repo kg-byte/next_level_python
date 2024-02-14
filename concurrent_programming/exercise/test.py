@@ -20,5 +20,4 @@ async def test_fetch_data():
 
         # Call the asynchronous function
         result = await retrieve_data(urls)
-
         assert result == expected_data

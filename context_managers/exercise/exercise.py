@@ -5,8 +5,15 @@
 # and write content to it. Use this decorator to write the content "Hello, world!" to the file.
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+from contextlib import contextmanager
 
-
+@contextmanager
+def file_manager(filename: str, mode: str):
+    file = open(filename, mode, encoding='utf8')
+    yield file
+    file.close()
+        
+        
 def write_file_content(content: str):
     with file_manager("sample.txt", "w") as file:
         file.write(content)
